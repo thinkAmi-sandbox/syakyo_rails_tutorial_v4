@@ -16,4 +16,12 @@ class User < ApplicationRecord
   has_secure_password  # 新しくレコードが追加されるときだけ依存性のバリデーションが動作
 
   validates :password, presence: true, length: { minimum: 6 }  # 更新時もバリデーションが適用されるようにする
+
+  # クラスメソッドとして用意
+  # 渡された文字列のハッシュ値を返す
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+             BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
 end
