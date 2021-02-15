@@ -17,7 +17,8 @@ class User < ApplicationRecord
   # ユーザーがセキュアなパスワードを持っている
   has_secure_password  # 新しくレコードが追加されるときだけ依存性のバリデーションが動作
 
-  validates :password, presence: true, length: { minimum: 6 }  # 更新時もバリデーションが適用されるようにする
+  validates :password, presence: true, length: { minimum: 6 },  # 更新時もバリデーションが適用されるようにする
+            allow_nil: true
 
   # クラスメソッドとして用意
   # 渡された文字列のハッシュ値を返す
