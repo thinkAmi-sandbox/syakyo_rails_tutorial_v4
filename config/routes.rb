@@ -25,5 +25,7 @@ Rails.application.routes.draw do
   # 名前付きルートおよびRESTfulなUsersリソースで必要なアクションがすべて利用可能になる
   resources :users
 
+  resources :account_activations, only: [:edit]
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
