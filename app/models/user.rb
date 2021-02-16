@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # ユーザーが複数のマイクロポストを持つ関連付け
+  has_many :microposts, dependent: :destroy
+
   attr_accessor :remember_token, :activation_token, :reset_token
 
   # 各種コールバック
