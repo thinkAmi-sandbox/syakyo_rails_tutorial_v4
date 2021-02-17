@@ -46,6 +46,8 @@ class UsersController < ApplicationController
     # byebug gem によるdebuggerメソッド
     # ここに来るとブレークポイントで止まるので、確認したいときはアンコメントする
     # debugger
+
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def destroy
@@ -60,15 +62,6 @@ class UsersController < ApplicationController
       # ストロングパラメータ
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
-    end
-
-    # ログイン済みユーザーかどうか確認
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
     end
 
     # 正しいユーザーかどうか確認
